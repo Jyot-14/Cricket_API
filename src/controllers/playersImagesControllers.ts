@@ -9,33 +9,6 @@ interface Player {
   faceImageId: number;
 }
 
-// Function to fetch faceImageIds for all matches in the database
-async function fetchAllMatchesFaceImageIds() {
-  try {
-    const upcomingMatchesRef = db.collection('JyotUpcomingMatches');
-    const upcomingMatchesSnapshot = await upcomingMatchesRef.get();
-
-    if (upcomingMatchesSnapshot.empty) {
-      console.log('No upcoming matches found in the database.');
-      return;
-    }
-
-    const promises: Promise<number[]>[] = [];
-
-    upcomingMatchesSnapshot.forEach(matchDoc => {
-      const matchId = matchDoc.id;
-      const promise = fetchFaceImageIds(matchId);
-      promises.push(promise);
-    });
-
-    const allFaceImageIds: number[][] = await Promise.all(promises);
-    console.log('All faceImageIds:', allFaceImageIds.flat());
-  } catch (error) {
-    console.error('Error fetching matches from the database:', error);
-    throw error;
-  }
-}
-
 // function to fetch faceImageIds from the database for a specific match
 async function fetchFaceImageIds(matchId: string): Promise<number[]> {
   try {
