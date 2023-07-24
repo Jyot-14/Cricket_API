@@ -7,8 +7,12 @@ export async function addPlayersData(req: Request, res: Response) {
   const upcomingMatchesCollection = db.collection('JyotUpcomingMatches');
 
   try {
+    // Get the current date
+    const currentDate = new Date().getTime();
+
     // Sort the data by startDate
     const sortedUpcomingMatchesSnapshot = await upcomingMatchesCollection
+      .where('startDate', '>=', currentDate)
       .orderBy('startDate', 'asc')
       .limit(20)
       .get();
@@ -30,7 +34,7 @@ export async function addPlayersData(req: Request, res: Response) {
         {
           headers: {
             'X-RapidAPI-Key':
-              'd65111930dmshb4f3b731af3cc2ap184e04jsn006d2eae17a9',
+              '38f56d0641msh9d39d2b06fa0a0bp159350jsn9a5cb3d2ec68',
             'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
           },
         }
@@ -41,7 +45,7 @@ export async function addPlayersData(req: Request, res: Response) {
         {
           headers: {
             'X-RapidAPI-Key':
-              'fb471303b6msh88e5e629a4cb13bp108267jsn885de5257b6b',
+              '5140757257msh54af06ae4889428p16f057jsn5d5b0c7daf4a',
             'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
           },
         }
@@ -67,13 +71,16 @@ export async function addPlayersData(req: Request, res: Response) {
           imageURL: `https://firebasestorage.googleapis.com/v0/b/my11-6b9a0.appspot.com/o/Jyot_Players_images%2FPlayers-Images%2F${player.faceImageId}.jpg?alt=media`,
         }));
       }
+      // Perform checks to prevent 'concat' on undefined arrays
+      const team1PlayingXI = team1Players['playing XI'] || [];
+      const team1Bench = team1Players.bench || [];
+      const team1Squad = team1Players['Squad'] || [];
+      const team1AllPlayers = team1Squad || team1PlayingXI.concat(team1Bench);
 
-      const team1AllPlayers = team1Players['playing XI'].concat(
-        team1Players.bench || []
-      );
-      const team2AllPlayers = team2Players['playing XI'].concat(
-        team2Players.bench || []
-      );
+      const team2PlayingXI = team2Players['playing XI'] || [];
+      const team2Bench = team2Players.bench || [];
+      const team2Squad = team2Players['Squad'] || [];
+      const team2AllPlayers = team2Squad || team2PlayingXI.concat(team2Bench);
 
       const team1PlayersWithImageURL = addImageURLToPlayers(
         team1AllPlayers,
