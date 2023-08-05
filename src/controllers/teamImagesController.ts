@@ -29,7 +29,7 @@ export async function downloadImages(req: Request, res: Response) {
         .filter(
           (match: any) =>
             match.matchInfo.matchFormat.toLowerCase() === 'odi' ||
-            match.matchInfo.matchFormat.toLowerCase() === 't20' // Include T20 matches
+            match.matchInfo.matchFormat.toLowerCase() === 't20'
         )
         .map((match: any) => {
           const { matchInfo } = match;
@@ -133,7 +133,7 @@ async function uploadImageToFirebase(
   await bucket.upload(localImagePath, {
     destination: `Jyot_Players_images/Teams-Images/${remoteImagePath}`,
     metadata: {
-      contentType: 'image/jpeg', // Change this based on the image type, if necessary
+      contentType: 'image/jpeg',
     },
   });
 
