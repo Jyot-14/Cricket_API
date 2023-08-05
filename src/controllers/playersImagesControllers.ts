@@ -14,7 +14,7 @@ async function fetchFaceImageIds(matchId: string): Promise<number[]> {
   try {
     const playersDataRef = db
       .collection('JyotUpcomingMatches')
-      .doc(matchId)
+      .doc('73792')
       .collection('playersData');
 
     const faceImageIds: number[] = [];
@@ -89,7 +89,7 @@ async function downloadAndSaveImages(imageIds: number[], maxCount: number) {
     method: 'GET',
     params: { p: 'det', d: 'high' },
     headers: {
-      'X-RapidAPI-Key': 'eda7dcfeb4mshd896c7edbdad4fdp13e213jsn1127558118a2',
+      'X-RapidAPI-Key': 'd65111930dmshb4f3b731af3cc2ap184e04jsn006d2eae17a9',
       'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
     },
     responseType: 'arraybuffer',

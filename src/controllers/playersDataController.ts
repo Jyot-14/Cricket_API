@@ -14,7 +14,7 @@ export async function addPlayersData(req: Request, res: Response) {
     const sortedUpcomingMatchesSnapshot = await upcomingMatchesCollection
       .where('startDate', '>=', currentDate)
       .orderBy('startDate', 'asc')
-      .limit(20)
+      .limit(10)
       .get();
 
     const upcomingMatchesData = sortedUpcomingMatchesSnapshot.docs.map(doc =>
@@ -34,7 +34,7 @@ export async function addPlayersData(req: Request, res: Response) {
         {
           headers: {
             'X-RapidAPI-Key':
-              '38f56d0641msh9d39d2b06fa0a0bp159350jsn9a5cb3d2ec68',
+              'fb471303b6msh88e5e629a4cb13bp108267jsn885de5257b6b',
             'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
           },
         }
@@ -45,7 +45,7 @@ export async function addPlayersData(req: Request, res: Response) {
         {
           headers: {
             'X-RapidAPI-Key':
-              '5140757257msh54af06ae4889428p16f057jsn5d5b0c7daf4a',
+              '7231dba0damsh3276c0ade8af22ap18ec03jsne2acc9d643d0',
             'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
           },
         }

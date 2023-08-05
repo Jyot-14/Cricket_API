@@ -27,7 +27,7 @@ export async function getUpcomingMatches(req: Request, res: Response) {
         .filter(
           (match: any) =>
             match.matchInfo.matchFormat.toLowerCase() === 'odi' ||
-            match.matchInfo.matchFormat.toLowerCase() === 't20' // Include T20 matches
+            match.matchInfo.matchFormat.toLowerCase() === 't20'
         )
         .map((match: any) => {
           const { matchInfo } = match;
